@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Ranera Schedule</title>
+  <title>Меню</title>
+  <script src="script.js"></script>
 </head>
 <body>
-    <h1>Выберите страницу для перехода:</h1>
-    
-    <button onclick="window.location.href = '1.html';">Кнопка 1</button>
-    <br><br>
-    <button onclick="window.location.href = '2.html';">Кнопка 2</button>
-    <br><br>
-    <button onclick="window.location.href = '3.html';">Кнопка 3</button>
+  <h1>Главная страница</h1>
+  
+  <button onclick="changeContent('страница 1')">Страница 1</button>
+  <button onclick="changeContent('страница 2')">Страница 2</button>
+  <button onclick="changeContent('страница 3')">Страница 3</button>
+  
+  <div id="content">Контент главной страницы</div>
+  
+  <button onclick="goToMain()">На главную</button>
 </body>
 </html>
