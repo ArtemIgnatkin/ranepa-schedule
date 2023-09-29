@@ -1,3 +1,39 @@
-h1 {
-    color: red;
-   }
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.return {
+    height: 50px;
+    max-width: 300px;
+}
+
+button {
+    width: 100%;
+    max-width: 300px;
+    height: 150px;
+}
+.container {
+    display: grid; /* Использование грид контейнера */
+    grid-template-columns: 1fr 1fr; /* Два столбца равной ширины */
+    grid-gap: 10px; /* Расстояние между блоками */
+}
+
+h2 {
+    text-align: center;
+  }
+  
+.item {
+    width: 100%; /* Ширина каждого блока */
+}
+table, td, th {
+    border-collapse: collapse;
+    border: 3px solid black;
+}
+
+td, th {
+    /* делаем отступ в ячейках, выставляем выравнивание текста */
+    padding: 10px 20px;
+    text-align: center;
+  }
