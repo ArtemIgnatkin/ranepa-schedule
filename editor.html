@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактор расписания</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Редактор расписания</h1>
+    <table>
+        <tr>
+            <th>Время</th>
+            <th>Предмет</th>
+            <th>Кабинет</th>
+            <th>Тип занятия</th>
+        </tr>
+        <tr>
+            <td>9:00 - 10:30</td>
+            <td><input type="text" class="subject"></td>
+            <td><input type="text" class="room"></td>
+            <td>
+                <select class="type">
+                    <option value=""></option>
+                    <option value="Семинар">Семинар</option>
+                    <option value="Лекция">Лекция</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>10:40 - 12:10</td>
+            <td><input type="text" class="subject"></td>
+            <td><input type="text" class="room"></td>
+            <td>
+                <select class="type">
+                    <option value=""></option>
+                    <option value="Семинар">Семинар</option>
+                    <option value="Лекция">Лекция</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>12:50 - 14:20</td>
+            <td><input type="text" class="subject"></td>
+            <td><input type="text" class="room"></td>
+            <td>
+                <select class="type">
+                    <option value=""></option>
+                    <option value="Семинар">Семинар</option>
+                    <option value="Лекция">Лекция</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>14:30 - 16:00</td>
+            <td><input type="text" class="subject"></td>
+            <td><input type="text" class="room"></td>
+            <td>
+                <select class="type">
+                    <option value=""></option>
+                    <option value="Семинар">Семинар</option>
+                    <option value="Лекция">Лекция</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>16:10 - 17:00</td>
+            <td><input type="text" class="subject"></td>
+            <td><input type="text" class="room"></td>
+            <td>
+                <select class="type">
+                    <option value=""></option>
+                    <option value="Семинар">Семинар</option>
+                    <option value="Лекция">Лекция</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button onclick="generateCode()">Изменить</button>
+    <h2>Готовый JSON-код:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        function generateCode() {
+            const data = [];
+
+            const rows = document.querySelectorAll('table tr:not(:first-child)'); // Выбираем все строки таблицы, кроме заголовка
+
+            rows.forEach((row, i) => {
+                const time = row.querySelector('td:first-child').textContent;
+                const subject = row.querySelector('.subject').value || "";
+                const room = row.querySelector('.room').value || "";
+                const type = row.querySelector('.type').value || "";
+
+                data.push({
+                    "Время": time,
+                    "Предмет": subject,
+                    "Кабинет": room,
+                    "Тип_занятий": type
+                });
+            });
+
+            document.getElementById("output").textContent = JSON.stringify(data, null, 4);
+        }
+    </script>
+</body>
+</html>
