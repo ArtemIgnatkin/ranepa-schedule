@@ -1,0 +1,389 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Расписание К-БУ 2303</h1>
+    <br>
+    <button onclick="window.location.href = 'index.html';" class="return" >Назад</button>
+    <br>
+    <div class="container">
+        <div>
+            <h2>Понедельник</h2>
+            <table id="scheduleTable1">
+                <tr>
+                    <th>Время</th>
+                    <th>Предмет</th>
+                    <th>Кабинет</th>
+                    <th>Тип занятий</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Вторник</h2>
+            <table id="scheduleTable2">
+                <tr>
+                    <th>Время</th>
+                    <th>Предмет</th>
+                    <th>Кабинет</th>
+                    <th>Тип занятий</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Среда</h2>
+            <table id="scheduleTable3">
+                <tr>
+                    <th>Время</th>
+                    <th>Предмет</th>
+                    <th>Кабинет</th>
+                    <th>Тип занятий</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Четверг</h2>
+            <table id="scheduleTable4">
+                <tr>
+                    <th>Время</th>
+                    <th>Предмет</th>
+                    <th>Кабинет</th>
+                    <th>Тип занятий</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Пятница</h2>
+            <table id="scheduleTable5">
+                <tr>
+                    <th>Время</th>
+                    <th>Предмет</th>
+                    <th>Кабинет</th>
+                    <th>Тип занятий</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Суббота</h2>
+            <table id="scheduleTable6">
+                <tr>
+                    <th>Время</th>
+                    <th>Предмет</th>
+                    <th>Кабинет</th>
+                    <th>Тип занятий</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <button onclick="window.location.href = 'index.html';" class="return" >Назад</button>
+</body>
+
+<script>
+    // Ваш JSON-объект с данными
+    // Понедельник
+    var table1 = [
+    {
+        "Время": "9:00 - 10:30",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "10:40 - 12:10",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "12:50 - 14:20",
+        "Предмет": "История",
+        "Кабинет": "159",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "14:30 - 16:00",
+        "Предмет": "Информатика",
+        "Кабинет": "157",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "16:10 - 17:40",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    }
+    ];
+    // Вторник
+var table2 = [
+    {
+        "Время": "9:00 - 10:30",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "10:40 - 12:10",
+        "Предмет": "ОБЖ",
+        "Кабинет": "250",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "12:50 - 14:20",
+        "Предмет": "Физика",
+        "Кабинет": "250",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "14:30 - 16:00",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "16:10 - 17:40",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    }
+    ];
+    // Среда
+var table3 = [
+    {
+        "Время": "9:00 - 10:30",
+        "Предмет": "Английский язык",
+        "Кабинет": "250",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "10:40 - 12:10",
+        "Предмет": "Информатика",
+        "Кабинет": "157",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "12:50 - 14:20",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "14:30 - 16:00",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "16:10 - 17:40",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    }
+    ];
+    // Четверг
+var table4 = [
+    {
+        "Время": "9:00 - 10:30",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "10:40 - 12:10",
+        "Предмет": "Информатика",
+        "Кабинет": "157",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "12:50 - 14:20",
+        "Предмет": "Физика",
+        "Кабинет": "339",
+        "Тип_занятий": "Лекция"
+    },
+    {
+        "Время": "14:30 - 16:00",
+        "Предмет": "Физ-ра",
+        "Кабинет": "СОК 2",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "16:10 - 17:40",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    }
+    ];
+    // Пятница
+var table5 = [
+    {
+        "Время": "9:00 - 10:30",
+        "Предмет": "Информатика",
+        "Кабинет": "339",
+        "Тип_занятий": "Лекция"
+    },
+    {
+        "Время": "10:40 - 12:10",
+        "Предмет": "Литература",
+        "Кабинет": "339",
+        "Тип_занятий": "Лекция"
+    },
+    {
+        "Время": "12:50 - 14:20",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "14:30 - 16:00",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "16:10 - 17:40",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    }
+    ];
+    // Суббота
+    var table6 = [
+    {
+        "Время": "9:00 - 10:30",
+        "Предмет": "Русский язык",
+        "Кабинет": "250",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "10:40 - 12:10",
+        "Предмет": "Английский язык",
+        "Кабинет": "250",
+        "Тип_занятий": "Семинар"
+    },
+    {
+        "Время": "12:50 - 14:20",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "14:30 - 16:00",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    },
+    {
+        "Время": "16:10 - 17:40",
+        "Предмет": "",
+        "Кабинет": "",
+        "Тип_занятий": ""
+    }
+    ];
+    var table = document.getElementById("scheduleTable1");
+
+    for (var i = 0; i < table1.length; i++) {
+        var row = table.insertRow(i + 1);
+        var lesson = table1[i];
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = lesson["Время"];
+        
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = lesson["Предмет"];
+        
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = lesson["Кабинет"];
+        
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = lesson["Тип_занятий"];
+    }
+    var table = document.getElementById("scheduleTable2");
+
+    for (var i = 0; i < table2.length; i++) {
+        var row = table.insertRow(i + 1);
+        var lesson = table2[i];
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = lesson["Время"];
+        
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = lesson["Предмет"];
+        
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = lesson["Кабинет"];
+        
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = lesson["Тип_занятий"];
+    }
+    var table = document.getElementById("scheduleTable3");
+
+    for (var i = 0; i < table3.length; i++) {
+        var row = table.insertRow(i + 1);
+        var lesson = table3[i];
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = lesson["Время"];
+        
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = lesson["Предмет"];
+        
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = lesson["Кабинет"];
+        
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = lesson["Тип_занятий"];
+    }
+    var table = document.getElementById("scheduleTable4");
+
+    for (var i = 0; i < table4.length; i++) {
+        var row = table.insertRow(i + 1);
+        var lesson = table4[i];
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = lesson["Время"];
+        
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = lesson["Предмет"];
+        
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = lesson["Кабинет"];
+        
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = lesson["Тип_занятий"];
+    }
+    var table = document.getElementById("scheduleTable5");
+
+    for (var i = 0; i < table5.length; i++) {
+        var row = table.insertRow(i + 1);
+        var lesson = table5[i];
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = lesson["Время"];
+        
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = lesson["Предмет"];
+        
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = lesson["Кабинет"];
+        
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = lesson["Тип_занятий"];
+    }
+    var table = document.getElementById("scheduleTable6");
+
+    for (var i = 0; i < table6.length; i++) {
+        var row = table.insertRow(i + 1);
+        var lesson = table6[i];
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = lesson["Время"];
+        
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = lesson["Предмет"];
+        
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = lesson["Кабинет"];
+        
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = lesson["Тип_занятий"];
+    }
+</script>
