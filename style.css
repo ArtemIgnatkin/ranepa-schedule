@@ -11,6 +11,7 @@ body.main {
 .return {
     height: 50px;
     max-width: 300px;
+    color: black;
 }
 
 button {
