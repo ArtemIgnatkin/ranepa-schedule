@@ -13,8 +13,6 @@ button {
     width: 100%;
     max-width: 300px;
     height: 150px;
-    font-size: 20px;
-    font-weight: bold;
 }
 .container {
     display: grid; /* Использование грид контейнера */
