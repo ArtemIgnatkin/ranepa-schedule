@@ -25,6 +25,7 @@ button {
     color: #951a1d;
     font-size: 20px;
 }
+
 .container {
     display: grid; /* Использование грид контейнера */
     grid-template-columns: 1fr 1fr; /* Два столбца равной ширины */
@@ -32,6 +33,7 @@ button {
 }
 
 h1 {
+    width: 1000px;
     text-align: center;
     margin: 20px 0;
 }
