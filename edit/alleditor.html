@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Расписание занятий</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .editable {
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Расписание занятий</h1>
+    
+    <input type="file" id="fileInput" style="display: none;">
+    <a id="downloadLink" style="display: none;">Скачать расписание</a>
+    
+    <button id="loadButton">Загрузить расписание</button>
+    
+    <table id="scheduleTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th>Предмет</th>
+                <th>Кабинет</th>
+                <th>Тип занятий</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <button id="editButton" style="display: none;">Редактировать расписание</button>
+    
+    <button id="saveButton" style="display: none;">Сохранить изменения</button>
+    
+    <script>
+        var scheduleData = null;
+        var editableCells = [];
+        
+        // Обработчик для кнопки "Загрузить расписание"
+        document.getElementById("loadButton").addEventListener("click", function() {
+            // При клике на кнопку "Загрузить расписание", активируем input[type=file]
+            document.getElementById("fileInput").click();
+        });
+        
+        // Обработчик для выбора файла
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+            var selectedFile = event.target.files[0];
+            if (selectedFile) {
+                // Читаем содержимое выбранного файла
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    scheduleData = JSON.parse(e.target.result);
+                    displaySchedule(scheduleData);
+                    document.getElementById("editButton").style.display = "block";
+                };
+                reader.readAsText(selectedFile);
+            }
+        });
+        
+        // Функция для отображения расписания в виде таблицы
+        function displaySchedule(scheduleData) {
+            var scheduleTable = document.getElementById("scheduleTable");
+            var scheduleBody = scheduleTable.querySelector("tbody");
+            
+            // Очищаем таблицу
+            scheduleBody.innerHTML = "";
+            editableCells = [];
+            
+            // Заполняем таблицу данными из JSON
+            for (var i = 0; i < scheduleData.length; i++) {
+                var row = scheduleBody.insertRow();
+                var cellTime = row.insertCell(0);
+                var cellSubject = row.insertCell(1);
+                var cellRoom = row.insertCell(2);
+                var cellType = row.insertCell(3);
+                
+                cellTime.innerHTML = scheduleData[i].Время;
+                createSubjectSelectCell(cellSubject, scheduleData[i].Предмет, i);
+                createEditableCell(cellRoom, scheduleData[i].Кабинет, 'Кабинет', i);
+                createTypeSelectCell(cellType, scheduleData[i]["Тип_занятий"], i);
+            }
+            
+            // Показываем таблицу
+            scheduleTable.style.display = "table";
+        }
+        
+        // Создание редактируемой ячейки
+        function createEditableCell(cell, value, field, rowIndex) {
+            var input = document.createElement("input");
+            input.type = "text";
+            input.value = value;
+            input.className = "editable";
+            input.dataset.field = field;
+            input.dataset.rowIndex = rowIndex;
+            input.addEventListener("input", handleInputChange);
+
+cell.appendChild(input);
+            editableCells.push(input);
+        }
+        
+        // Создание ячейки с выпадающим списком для выбора типа занятий
+        function createTypeSelectCell(cell, value, rowIndex) {
+            var select = document.createElement("select");
+            select.dataset.field = 'Тип_занятий';
+            select.dataset.rowIndex = rowIndex;
+            select.addEventListener("change", handleInputChange);
+            
+            var emptyOption = document.createElement("option");
+            emptyOption.value = "";
+            emptyOption.text = "";
+            
+            var lectureOption = document.createElement("option");
+            lectureOption.value = "Лекция";
+            lectureOption.text = "Лекция";
+            
+            var seminarOption = document.createElement("option");
+            seminarOption.value = "Семинар";
+            seminarOption.text = "Семинар";
+            
+            select.appendChild(emptyOption);
+            select.appendChild(lectureOption);
+            select.appendChild(seminarOption);
+            
+            select.value = value;
+            
+            cell.appendChild(select);
+            editableCells.push(select);
+        }
+        
+        // Создание ячейки с выпадающим списком для выбора предметов
+        function createSubjectSelectCell(cell, value, rowIndex) {
+            var select = document.createElement("select");
+            select.dataset.field = 'Предмет';
+            select.dataset.rowIndex = rowIndex;
+            select.addEventListener("change", handleInputChange);
+            
+            var subjects = [
+                "",
+                "Математика",
+                "Русский",
+                "Литература",
+                "Английский язык",
+                "География",
+                "Обществознание",
+                "История",
+                "ОБЖ",
+                "Экономика",
+                "Физика",
+                "Биология",
+                "Химия",
+                "Физ-ра"
+            ];
+            
+            for (var i = 0; i < subjects.length; i++) {
+                var option = document.createElement("option");
+                option.value = subjects[i];
+                option.text = subjects[i];
+                select.appendChild(option);
+            }
+            
+            select.value = value;
+            
+            cell.appendChild(select);
+            editableCells.push(select);
+        }
+        
+        // Обработчик для кнопки "Редактировать расписание"
+        document.getElementById("editButton").addEventListener("click", function() {
+            // Включаем режим редактирования
+            document.getElementById("editButton").style.display = "none";
+            document.getElementById("saveButton").style.display = "block";
+        });
+        
+        // Обработчик для кнопки "Сохранить изменения"
+        document.getElementById("saveButton").addEventListener("click", function() {
+            if (scheduleData) {
+                // Сохраняем изменения из редактируемых ячеек в JSON-данные
+                for (var i = 0; i < editableCells.length; i++) {
+                    var cell = editableCells[i];
+                    var rowIndex = cell.dataset.rowIndex;
+                    var field = cell.dataset.field;
+                    if (field === 'Тип_занятий') {
+                        scheduleData[rowIndex][field] = cell.value;
+                    } else {
+                        scheduleData[rowIndex][field] = cell.value;
+                    }
+                }
+                
+                // Преобразуем JSON-данные в текст
+                var jsonData = JSON.stringify(scheduleData, null, 2);
+                
+                // Создаем Blob с данными и устанавливаем тип контента
+                var blob = new Blob([jsonData], { type: "application/json" });
+
+// Создаем URL для Blob
+                var url = URL.createObjectURL(blob);
+                
+                // Устанавливаем URL для ссылки "Скачать расписание"
+                var downloadLink = document.getElementById("downloadLink");
+                downloadLink.href = url;
+                downloadLink.download = "schedule.json"; // Задаем имя файла
+                
+                // Показываем ссылку для скачивания
+                downloadLink.style.display = "block";
+                
+                alert("Изменения сохранены");
+            }
+        });
+        
+        // Обработчик для изменения данных в редактируемых ячейках
+        function handleInputChange(event) {
+            var cell = event.target;
+            var rowIndex = cell.dataset.rowIndex;
+            var field = cell.dataset.field;
+            if (field === 'Тип_занятий') {
+                scheduleData[rowIndex][field] = cell.value;
+            } else {
+                scheduleData[rowIndex][field] = cell.value;
+            }
+        }
+    </script>
+</body>
+</html>
