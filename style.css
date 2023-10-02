@@ -6,11 +6,13 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    min-width: 1000px;
   }
 body.main {
     background-color: #951a1d;
     color: white;
+}
+body.group {
+    min-width: 1000px;
 }
 
 .return {
