@@ -6,6 +6,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    min-width: 1000px;
   }
 body.main {
     background-color: #951a1d;
@@ -33,7 +34,6 @@ button {
 }
 
 h1 {
-    width: 1000px;
     text-align: center;
     margin: 20px 0;
 }
