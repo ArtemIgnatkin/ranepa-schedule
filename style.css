@@ -11,9 +11,6 @@ body.main {
     background-color: #951a1d;
     color: white;
 }
-body.group {
-    min-width: 1000px;
-}
 
 .return {
     height: 50px;
