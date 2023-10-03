@@ -23,7 +23,7 @@
 <body>
     <h1>Расписание занятий</h1>
 
-    <select name="filename">
+    <select id="fileNameSelect">
         <option value="K-ISP2301">К-ИСП 2301</option>
         <option value="K-ISP2302">К-ИСП 2302</option>
         <option value="K-ISP2303">К-ИСП 2303</option>
@@ -195,40 +195,43 @@ cell.appendChild(input);
         });
         
         // Обработчик для кнопки "Сохранить изменения"
-        document.getElementById("saveButton").addEventListener("click", function() {
-            if (scheduleData) {
-                // Сохраняем изменения из редактируемых ячеек в JSON-данные
-                for (var i = 0; i < editableCells.length; i++) {
-                    var cell = editableCells[i];
-                    var rowIndex = cell.dataset.rowIndex;
-                    var field = cell.dataset.field;
-                    if (field === 'Тип_занятий') {
-                        scheduleData[rowIndex][field] = cell.value;
-                    } else {
-                        scheduleData[rowIndex][field] = cell.value;
-                    }
-                }
-                
-                // Преобразуем JSON-данные в текст
-                var jsonData = JSON.stringify(scheduleData, null, 2);
-                
-                // Создаем Blob с данными и устанавливаем тип контента
-                var blob = new Blob([jsonData], { type: "application/json" });
+document.getElementById("saveButton").addEventListener("click", function() {
+    if (scheduleData) {
+        // Получаем выбранное имя файла
+        var selectedFileName = document.getElementById("fileNameSelect").value;
 
-// Создаем URL для Blob
-                var url = URL.createObjectURL(blob);
-                
-                // Устанавливаем URL для ссылки "Скачать расписание"
-                var downloadLink = document.getElementById("downloadLink");
-                downloadLink.href = url;
-                downloadLink.download = "schedule.json"; // Задаем имя файла
-                
-                // Показываем ссылку для скачивания
-                downloadLink.style.display = "block";
-                
-                alert("Изменения сохранены");
+        // Сохраняем изменения из редактируемых ячеек в JSON-данные
+        for (var i = 0; i < editableCells.length; i++) {
+            var cell = editableCells[i];
+            var rowIndex = cell.dataset.rowIndex;
+            var field = cell.dataset.field;
+            if (field === 'Тип_занятий') {
+                scheduleData[rowIndex][field] = cell.value;
+            } else {
+                scheduleData[rowIndex][field] = cell.value;
             }
-        });
+        }
+
+        // Преобразуем JSON-данные в текст
+        var jsonData = JSON.stringify(scheduleData, null, 2);
+
+        // Создаем Blob с данными и устанавливаем тип контента
+        var blob = new Blob([jsonData], { type: "application/json" });
+
+        // Создаем URL для Blob
+        var url = URL.createObjectURL(blob);
+
+        // Устанавливаем URL для ссылки "Скачать расписание" с выбранным именем файла
+        var downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = url;
+        downloadLink.download = selectedFileName; // Задаем имя файла
+
+        // Показываем ссылку для скачивания
+        downloadLink.style.display = "block";
+
+        alert("Изменения сохранены");
+    }
+});
         
         // Обработчик для изменения данных в редактируемых ячейках
         function handleInputChange(event) {
