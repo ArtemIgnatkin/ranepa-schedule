@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="color.css">
     <title>Расписание занятий</title>
     <style>
         table {
@@ -16,7 +17,7 @@
             background-color: #f2f2f2;
         }
         .editable {
-            background-color: lightyellow;
+            background-color: white;
         }
     </style>
 </head>
@@ -100,6 +101,25 @@
                 createSubjectSelectCell(cellSubject, scheduleData[i].Предмет, i);
                 createEditableCell(cellRoom, scheduleData[i].Кабинет, 'Кабинет', i);
                 createTypeSelectCell(cellType, scheduleData[i]["Тип_занятий"], i);
+
+                if (i < 5) {
+                    row.classList.add("monday")
+                }
+                if (i < 10 && i > 4) {
+                    row.classList.add("tuesday")
+                }
+                if (i < 15 && i > 9) {
+                    row.classList.add("wednesday")
+                }
+                if (i < 20 && i > 14) {
+                    row.classList.add("thursday")
+                }
+                if (i < 25 && i > 19) {
+                    row.classList.add("friday")
+                }
+                if (i < 30 && i > 24) {
+                    row.classList.add("saturday")
+                }
             }
             
             // Показываем таблицу
